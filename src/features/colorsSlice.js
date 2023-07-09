@@ -1,23 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { COLORS_URL } from "../const";
 
-export const fetchColors = createAsyncThunk("colors/fetchColors", async () => {
+export const fetchColors = createAsyncThunk("color/fetchColors", async () => {
     const response = await fetch(COLORS_URL);
     const data = await response.json();
     return data;
 });
 
 const colorsSlice = createSlice({
-    name: "colors",
+    name: "color",
     initialState: {
         status: "idle",
-        colorsList: [],
+        colorList: [],
         error: null,
-    },
-    reducers: {
-        setColors: (state, action) => {
-            state.colors = action.payload;
-        },
     },
     extraReducers: (builder) => {
         builder
@@ -26,7 +21,7 @@ const colorsSlice = createSlice({
             })
             .addCase(fetchColors.fulfilled, (state, action) => {
                 state.status = "success";
-                state.colorsList = action.payload;
+                state.colorList = action.payload;
             })
             .addCase(fetchColors.rejected, (state, action) => {
                 state.status = "failed";
@@ -34,7 +29,5 @@ const colorsSlice = createSlice({
             });
     },
 });
-
-export const { setColors } = colorsSlice.actions;
 
 export default colorsSlice.reducer;

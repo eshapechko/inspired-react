@@ -6,7 +6,7 @@ import cn from "classnames";
 import { NavLink } from "react-router-dom";
 
 export const Footer = () => {
-    const { categories } = useSelector((state) => state.navigation);
+    const { categories, genderList } = useSelector((state) => state.navigation);
 
     return (
         <footer>
@@ -16,17 +16,17 @@ export const Footer = () => {
                         <h2 className={cn(s.title, s.categoryTitle)}>Каталог</h2>
 
                         <ul className={s.categoryList}>
-                            {Object.entries(categories)?.map((item) => (
-                                <li key={item[0]} className={s.categoryItem}>
+                            {genderList.map((gender) => (
+                                <li key={gender} className={s.categoryItem}>
                                     <h3 className={s.categorySubtitle}>
-                                        <NavLink to={item[0]} className={s.link}>
-                                            {item[1].title}
+                                        <NavLink to={gender} className={s.link}>
+                                            {categories[gender].title}
                                         </NavLink>
                                     </h3>
                                     <ul className={s.categorySublist}>
-                                        {item[1].list.map((category) => (
+                                        {categories[gender].list.map((category) => (
                                             <li key={category.slug}>
-                                                <NavLink className={s.link} to={`${item[0]}/${category.slug}`}>
+                                                <NavLink className={s.link} to={`${gender}/${category.slug}`}>
                                                     {category.title}
                                                 </NavLink>
                                             </li>
