@@ -1,18 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import s from "./Main.module.scss";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Main = ({ children }) => {
-    const { status } = useSelector((state) => state.statusServer);
-    const location = useLocation();
-    const navigate = useNavigate();
+  const { status } = useSelector(state => state.statusServer)
 
-    useEffect(() => {
-        if (!status && location.pathname !== "/404") {
-            navigate("/404");
-        }
-    }, [navigate, status, location]);
+  const navigate = useNavigate()
+  const location = useLocation()
 
-    return <main className={s.main}>{children}</main>;
-};
+  useEffect(() => {
+    if (!status && location.pathname !== '/404') {
+      navigate('/404')
+    }
+  }, [navigate, status, location])
+
+  return <div className={s.main}>{children}</div>;
+}

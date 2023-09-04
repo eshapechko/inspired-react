@@ -1,14 +1,12 @@
-import { Container } from "../../Layout/Container/Container";
-import { Category } from "./Category/Category";
-import { Gender } from "./Gender/Gender";
+import { Container } from "../../Layout/Container/Container.jsx";
+import { Category } from "./Category/Category.jsx";
+import { Gender } from "./Gender/Gender.jsx";
 
-export const Navigation = () => {
-    return (
-        <nav>
-            <Container>
-                <Gender />
-                <Category />
-            </Container>
-        </nav>
-    );
-};
+export const Navigation = () => (
+  <nav>
+    <Container>
+      <Gender />
+      <Category />
+    </Container>
+  </nav>
+);

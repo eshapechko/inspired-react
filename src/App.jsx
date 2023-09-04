@@ -1,43 +1,43 @@
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-
-import { MainPage } from "./Components/MainPage/MainPage";
-import { Root } from "./routes/Root";
-import { ErrorPage } from "./Components/ErrorPage/ErrorPage";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import { MainPage } from "./Components/Pages/MainPage/MainPage.jsx";
+import { Root } from "./routes/Root.jsx";
+import { ErrorPage } from "./Components/Pages/ErrorPage/ErrorPage.jsx";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchNavigation } from "./features/navigationSlice";
-import { fetchColors } from "./features/colorsSlice";
-import { ProductPage } from "./Components/ProductPage/ProductPage";
-import { CartPage } from "./Components/CartPage/CartPage";
-import { FavoritePage } from "./Components/FavoritePage/FavoritePage";
-import { SearchPage } from "./Components/SearchPage/SearchPage";
+import { fetchNavigation } from "./features/navigationSlice.js";
+import { fetchColors } from "./features/colorSlice.js";
+import { ProductPage } from "./Components/Pages/ProductPage/ProductPage.jsx";
+import { FavoritePage } from "./Components/Pages/FavoritePage/FavoritePage.jsx";
+import { CartPage } from "./Components/Pages/CartPage/CartPage.jsx";
+import { SearchPage } from "./Components/Pages/SearchPage/SearchPage.jsx";
 
 const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<Root />}>
-            <Route index element={<MainPage />} />
-            <Route path="catalog/:gender/:category?" element={<MainPage />} />
-            <Route path="product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/favorite" element={<FavoritePage />} />
-            <Route path="/search" element={<SearchPage />} />
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<MainPage />} />
+      <Route path="/favorite" element={<FavoritePage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/product/:id" element={<ProductPage />} />
+      <Route path="/catalog/:gender/:category?" element={<MainPage />} />
 
-            <Route path="*" element={<ErrorPage />} />
-        </Route>
-    )
+      <Route path="*" element={<ErrorPage />} />
+    </Route>,
+  ),
 );
 
 export const App = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchNavigation());
-        dispatch(fetchColors());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchNavigation());
+    dispatch(fetchColors());
+  }, [dispatch]);
 
-    return (
-        <>
-            <RouterProvider router={router}></RouterProvider>
-        </>
-    );
+  return <RouterProvider router={router}></RouterProvider>;
 };
